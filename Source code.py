@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+#Libraries
 import os
 import glob
 import pandas as pd
@@ -7,25 +8,17 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn
 
-
 seaborn.set()
-
 pd.set_option("display.max_columns", None)
 
-
+#Importing files
 path = "C:\\Users\\Norbert\\Desktop\\f1db_csv"
 os.chdir(path) #change current working dir
 os.getcwd() #current working dir
+fileslist_csv = [f for f in glob.glob("*.csv")] #csv files list
+csvs = [pd.read_csv(i) for i in fileslist_csv] #Read all csv files
 
-fileslist = os.listdir(path) #list all files in dr
-fileslist_csv = [f for f in glob.glob("*.csv")]
-
-csvs = [pd.read_csv(i) for i in fileslist_csv]
-
-[i.info() for i in csvs]
-
-10
-
+#Description for files list
 #0 - cirtuits
 #1 - constructors
 #2 - constructor results
@@ -40,48 +33,62 @@ csvs = [pd.read_csv(i) for i in fileslist_csv]
 #11 - nothing important
 #12 - status
 
-csvs[10].head()
-csvs[10].info()
-csvs[6].describe()
-csvs[2].points.unique()
-
-
-csvs[10].head()
-csvs[10].info()
-csvs[5].position.unique()
+#Creating df/lists for graphs
 
 #Constructors - Points
-constructors = csvs[1]
-constructors = constructors[["constructorId", "name"]]
-
-points = csvs[2]
-points = points[["constructorId", "points", "raceId"]]
-
-races = csvs[9]
-races = races[["raceId", "year"]]
+constructors = csvs[1][["constructorId", "name"]]
+points = csvs[2][["constructorId", "points", "raceId"]]
+races = csvs[9][["raceId", "year"]]
 
 constructors_points = pd.merge(constructors, points, on="constructorId")
 constructors_points_year = pd.merge(constructors_points, races, on="raceId")
-constructors_points_year = constructors_points_year[constructors_points_year["year"] >= 1978]
-williams = constructors_points_year[constructors_points_year["name"] == "Williams"]
+constructors_points_year = constructors_points_year[constructors_points_year["year"] >= 1978] #Filtering to only match years when Williams was present in F1
+
+ConstructorsPoints = constructors_points_year.groupby("name").points.sum().sort_values(ascending=False)[0:10] #Top 10 - Constructors with most points 1977-2019
+
+#Plot preparation - ConstructorPoints
+colors=['b']*10
+colors[4]='r'
+ConstructorsPoints.plot(kind="bar", color=colors)
+plt.ylabel("Points")
+plt.xlabel("Constructors")
+plt.xticks(rotation=45)
+plt.title("Top 10 - Points gained by constructors between 1977-2019")
+plt.savefig("ConstructorsPoints.png", dpi=300,bbox_inches='tight')
+plt.show()
+
+#Constructors - Points difference at the end of the season
+
+#williams = constructors_points_year[constructors_points_year["name"] == "Williams"] 
+
+groupedWilliams = constructors_points_year[constructors_points_year["name"] == "Williams"].groupby('year').points.sum()
 rest = constructors_points_year[constructors_points_year["name"] != "Williams"]
-list1 = [1980, 1981, 1986, 1987, 1992, 1993, 1994, 1996, 1997]
-williams2 = williams[williams["year"].isin(list1)]
+rest = (rest.groupby(['year', 'name']).agg({'points':'sum'})).groupby('year').points.max() #To calculate difference - Others
 
-grouped = constructors_points_year.groupby("name").points.sum().sort_values(ascending=False)
-grouped = grouped[0:10]
+pointsdiff = pd.merge(groupedWilliams, rest, on='year') #Merging both df's
+pointsdiff['difference'] = pointsdiff.points_x - pointsdiff.points_y #Creating points difference columns
 
-groupedwilliams = williams.groupby("year").points.sum()
-groupedwilliams2 = williams2.groupby("year").points.sum()
+list1 = [1980, 1981, 1986, 1987, 1992, 1993, 1994, 1996, 1997] #List of years when Williams won constructor Championships - for scatter plot
+williamsScatter = pointsdiff[pointsdiff.index.isin(list1)]
 
-rest1 = rest.groupby(['year', 'name']).agg({'points':'sum'})
-rest2 = rest1.groupby('year').points.max()
+#rest = constructors_points_year[constructors_points_year["name"] != "Williams"]
+#williams2 = williams[williams["year"].isin(list1)]
+#groupedwilliams = williams.groupby("year").points.sum() #To calculate difference - Williams
+#groupedwilliams2 = williams2.groupby("year").points.sum() #To prepare scatter plot
+#rest1 = (rest.groupby(['year', 'name']).agg({'points':'sum'})).groupby('year').points.max() #To calculate difference - Others
 
-pointsdiff = pd.merge(groupedwilliams, rest2, on='year')
-pointsdiff['difference'] = pointsdiff.points_x - pointsdiff.points_y
+#Plot preparation - Points difference
 
-list1 = [1980, 1981, 1986, 1987, 1992, 1993, 1994, 1996, 1997]
-williams3 = pointsdiff[pointsdiff.index.isin(list1)]
+plt.plot(pointsdiff.index, pointsdiff.difference, label='Points difference')
+plt.scatter(williamsScatter.index, williamsScatter.difference, color='r', marker='d', label='World Championship')
+plt.ylabel('Points difference')
+plt.xlabel('Year')
+plt.legend(loc='best')
+plt.title('Williamss points advantage over the best of the rest')
+plt.savefig('PointsDifference1977-2019.png', dpi=300,bbox_inches='tight')
+plt.show()
+
+######################
 
 #Drivers - Points
 drivers = csvs[4]
@@ -179,7 +186,6 @@ year2019lap['name_x'] = year2019lap.name_x.str.replace('Grand Prix', 'GP')
 
 #Highest speed 2004-2019 - plot11
 
-
 proposal34 = proposal3.groupby(['year_x', 'name_x'], as_index=False).agg({'difference':'first'})
 
 plt.figure(1)
@@ -252,17 +258,6 @@ plt.xlabel('Rok')
 plt.legend(loc='best')
 plt.title('Przewaga punktowa Williamsa nad najlepszym z pozostałych')
 plt.savefig('PointsDifference1977-2019.png', dpi=300,bbox_inches='tight')
-plt.show()
-
-#Plot1
-colors=['b']*10
-colors[4]='r'
-plot1 = grouped.plot(kind="bar", color=colors)
-plt.ylabel("Liczba punktów")
-plt.xlabel("Konstruktor")
-plt.xticks(rotation=45)
-plt.title("Najlepsza 10 - punkty zdobyte w latach 1977-2019")
-plt.savefig("constructors.png", dpi=300,bbox_inches='tight')
 plt.show()
 
 #Plot2
