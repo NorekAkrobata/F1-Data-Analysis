@@ -8,3 +8,16 @@ Csv files used for this analysis were created by user named Ergast from website 
 
 # Results
 
+First thing that comes to everyones mind, especially the ones that are not interested in F1 or motorsport in general, is to ask why Williams Racing team? What is so special about them?
+Team that was created in 1977 is one of the most successful racing teams of all times, which can be seen in graph below, which shows total points earned by top teams since Williams joined Formula 1.
+
+POINTS GRAPH
+
+That many earned points together with 9 constructor's championship titles (2nd in the history) and 7 driver's championships (4th) shows us that Williams is one of the greatest teams in Formula 1 history.
+However team in the last 3 seasons was last in the constructor's championship with just 8 points across that time, which is pretty shocking for that kind of brand in motorsport. 
+
+To start with an analysis, the obvious part is to check how good they were performing in case of championship points and how much ahead/behind the team was in comparison with the best of the rest.
+
+POINTS DIFFERENCE GRAPH
+
+----------------------------
