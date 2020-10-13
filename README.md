@@ -18,6 +18,18 @@ However team in the last 3 seasons was last in the constructor's championship wi
 
 To start with an analysis, the obvious part is to check how good they were performing in case of championship points and how much ahead/behind the team was in comparison with the best of the rest.
 
-![Alt text](/Data/PointsDifference.png?raw=true "Points difference across F1 seasons")
+![Alt text](/Data/PointsDifference.PNG?raw=true "Points difference across F1 seasons")
 
-----------------------------
+---------------------------- TBA
+
+![Alt text](/Data/PaceDifference.PNG?raw=true "Points difference across F1 seasons")
+
+---------------------------- TBA
+
+![Alt text](/Data/BestLapDifference.PNG?raw=true "Points difference across F1 seasons")
+
+---------------------------- TBA
+
+![Alt text](/Data/TopSpeedDifference.PNG?raw=true "Points difference across F1 seasons")
+
+---------------------------- TBA
