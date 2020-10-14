@@ -28,7 +28,11 @@ Conclusion is clear in case of pure points gained in races, nevertheless to trul
 
 Presented figure shows us difference in average lap time between Williams and the best of other competitors indicated in seconds per lap. 
 Interesting aspect is that Williams had little bit worse average pace than any other team in seasons 1980, 1981, and 1997 and still managed to win world championship.
-The most interesting part for us is 
+The most interesting part for us is period from 2009 season (marked in green) to compare it with previous graps and its conclusion. 
+However, between 2009 and 2019 season Williams actually improved their average lap time which is opposite of what we saw before. 
+Also in this graph we can point that latest decrease in performance was between 2003 and 2006 season (marked in red) which is not really matching with previous graph. 
+That brings us to conclusion that average lap time might not be the best performance indicator due to the fact that it is affected by all different events during the race like weather changes, 
+incidents followed by safety cars which results in decreasing lap times differences between teams. To analysis performance further, I decided to focus on best lap performed top speed achieved during each race.
 
 ![Alt text](/Data/BestLapDifference.PNG?raw=true "Best lap time difference across F1 seasons")
 
