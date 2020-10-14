@@ -41,3 +41,5 @@ incidents followed by safety cars which results in decreasing lap times differen
 ![Alt text](/Data/TopSpeedDifference.PNG?raw=true "Top speed difference across F1 seasons")
 
 ---------------------------- TBA
+
+# Conclusions
