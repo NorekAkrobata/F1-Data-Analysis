@@ -20,16 +20,20 @@ To start with an analysis, the obvious part is to check how good they were perfo
 
 ![Alt text](/Data/PointsDifference.PNG?raw=true "Points difference across F1 seasons")
 
+Above figure which shows us championship points difference between Williams and the best of the rest, also shows us undergoing crysis in Williams that started from the 2009 season (marked in red). 
+Team managed to improve competitiveness by a little on seasons 2012 and 2014, however overall decreasing tendency resulted in just 1 points at the end of 2019 season, worst in their history.
+Conclusion is clear in case of pure points gained in races, nevertheless to trully decide if it was their worst season we have to dive deeper into car performance data.
+
+![Alt text](/Data/PaceDifference.PNG?raw=true "Average pace difference across F1 seasons")
+
+Presented figure shows us difference in average lap time between Williams and the best of other competitors indicated in seconds per lap. 
+Interesting aspect is that Williams had little bit worse average pace than any other team in seasons 1980, 1981, and 1997 and still managed to win world championship.
+The most interesting part for us is 
+
+![Alt text](/Data/BestLapDifference.PNG?raw=true "Best lap time difference across F1 seasons")
+
 ---------------------------- TBA
 
-![Alt text](/Data/PaceDifference.PNG?raw=true "Points difference across F1 seasons")
-
----------------------------- TBA
-
-![Alt text](/Data/BestLapDifference.PNG?raw=true "Points difference across F1 seasons")
-
----------------------------- TBA
-
-![Alt text](/Data/TopSpeedDifference.PNG?raw=true "Points difference across F1 seasons")
+![Alt text](/Data/TopSpeedDifference.PNG?raw=true "Top speed difference across F1 seasons")
 
 ---------------------------- TBA
